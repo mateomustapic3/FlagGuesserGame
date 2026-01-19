@@ -79,6 +79,12 @@ button:disabled {
     border-radius: 6px; 
 }
 
+#progress-text {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
 #timer-container {
     font-size: 18px;
     margin: 20px 0;
@@ -91,6 +97,14 @@ button:disabled {
     font-size: 22px;
     font-weight: bold;
     color: #333;
+}
+
+.correct {
+    color: #2e7d32;
+}
+
+.wrong {
+    color: #c62828;
 }
 
 .life-icon {

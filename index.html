@@ -11,8 +11,8 @@
 <body>
     
     <div id="name-entry-container">
-    <button id="start-button">Play Quiz</button>
-    <div>Developed by: Mateo Mustapić</div>
+    <button id="start-button" disabled>Play Quiz</button>
+    <div>Developed by: Mateo Mustapic</div>
     </div>
 
     <div class="quiz-container" style="display: none;">
@@ -23,15 +23,14 @@
             <span>Score: </span><span id="score">0</span>
         </div>
         <br>
-        <div id="lives">
-        <div id="life-icons"></div>
-        </div>
+        <div id="lives"></div>
 
         <div id="progress-container">
             <div id="progress-bar"></div>
         </div>
+        <div id="progress-text"></div>
 
-        <div id="timer-container">
+        <div id="timer-container" role="status" aria-live="polite">
             <span>Time left: </span><span id="timer">10</span> seconds
         </div>
 
@@ -41,7 +40,7 @@
         </div>
 
         <div id="options-container"></div>
-        <div id="message"></div>
+        <div id="message" role="status" aria-live="polite"></div>
 
 
         <button id="next-button" style="display: none;">Next</button>

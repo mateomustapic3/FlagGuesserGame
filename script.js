@@ -27,8 +27,10 @@ $(document).ready(function () {
             flags = data.flags;
             maxQuestions = Math.min(totalQuestions, flags.length);
             isDataLoaded = true;
+            $("#start-button").prop("disabled", false);
         })
         .fail(function() {
+            $("#start-button").text("Failed to load flags").prop("disabled", true);
             alert("Failed to load flag data.");
         });
 
@@ -41,6 +43,7 @@ $(document).ready(function () {
         $("#result-container").hide();
         $("#name-entry-container").hide();
         $(".quiz-container").show();
+        $("#message").hide().text("").removeClass("correct wrong");
         updateLives();
         $(".quiz-container button").prop("disabled", false);
         generateQuestion();
@@ -56,6 +59,7 @@ $(document).ready(function () {
         $("#score").text(score);
         updateLives();
         $("#progress-bar").css("width", (questionCount / maxQuestions) * 100 + "%");
+        $("#progress-text").text("Question " + questionCount + " of " + maxQuestions);
 
         currentFlag = remainingFlags.shift();
         if (currentFlag && usedFlagNames.has(currentFlag.name)) {
@@ -113,11 +117,12 @@ $(document).ready(function () {
         startTimer();
 
         $("#next-button").hide();
-        $("#message").hide();
+        $("#message").hide().text("").removeClass("correct wrong");
     }
 
     function checkAnswer(selected, button) {
         stopTimer();
+        disableOptionButtons();
 
         let message = "";
         let messageClass = "";
@@ -159,7 +164,8 @@ $(document).ready(function () {
             $("#timer").text(timeLeft);
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                $("#message").text("Time's up! The correct answer is " + currentFlag.name).addClass("wrong").show();
+                disableOptionButtons();
+                $("#message").text("Time's up! The correct answer is " + currentFlag.name).removeClass("correct").addClass("wrong").show();
                 lives--;
                 updateLives(); 
                 if (lives <= 0) {
@@ -173,6 +179,10 @@ $(document).ready(function () {
 
     function stopTimer() {
         clearInterval(timerInterval);
+    }
+
+    function disableOptionButtons() {
+        $("#options-container button").prop("disabled", true);
     }
 
     function shuffleArray(array) {
@@ -193,6 +203,7 @@ $(document).ready(function () {
     }
 
     function endQuiz() {
+        stopTimer();
         $("#result-container").show();
         if (lives <= 0) {
             $("#result-message").text("Game Over! You lost.");
