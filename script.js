@@ -80,7 +80,7 @@ $(document).ready(function () {
             if (token !== questionToken) {
                 return;
             }
-            $("#flag").attr("src", flagImage).fadeIn(1000);
+            $("#flag").attr("src", flagImage).fadeIn(700);
         };
         img.onerror = function() {
             if (token !== questionToken) {
@@ -207,6 +207,7 @@ $(document).ready(function () {
         $(".quiz-container button").prop("disabled", true);
         $("#retry-button").prop("disabled", false);
     }
+
 
     $("#retry-button").click(function () {
         startGame();
